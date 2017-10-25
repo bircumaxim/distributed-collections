@@ -1,0 +1,12 @@
+D:\projects\distributed-collections\src\Data\Infrastructure\Transport\bin\Debug\Transport.dll
+D:\projects\distributed-collections\src\Data\Infrastructure\Transport\bin\Debug\Transport.pdb
+D:\projects\distributed-collections\src\Data\Infrastructure\Transport\bin\Debug\log4net.dll
+D:\projects\distributed-collections\src\Data\Infrastructure\Transport\bin\Debug\Messages.dll
+D:\projects\distributed-collections\src\Data\Infrastructure\Transport\bin\Debug\Serialization.dll
+D:\projects\distributed-collections\src\Data\Infrastructure\Transport\bin\Debug\Messages.pdb
+D:\projects\distributed-collections\src\Data\Infrastructure\Transport\bin\Debug\Serialization.pdb
+D:\projects\distributed-collections\src\Data\Infrastructure\Transport\bin\Debug\log4net.xml
+D:\projects\distributed-collections\src\Data\Infrastructure\Transport\obj\Debug\Transport.csprojResolveAssemblyReference.cache
+D:\projects\distributed-collections\src\Data\Infrastructure\Transport\obj\Debug\Transport.csproj.CoreCompileInputs.cache
+D:\projects\distributed-collections\src\Data\Infrastructure\Transport\obj\Debug\Transport.dll
+D:\projects\distributed-collections\src\Data\Infrastructure\Transport\obj\Debug\Transport.pdb

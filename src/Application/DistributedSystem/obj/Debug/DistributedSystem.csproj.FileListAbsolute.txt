@@ -1,0 +1,6 @@
+D:\projects\distributed-collections\src\Application\DistributedSystem\bin\Debug\DistributedSystem.exe
+D:\projects\distributed-collections\src\Application\DistributedSystem\bin\Debug\DistributedSystem.pdb
+D:\projects\distributed-collections\src\Application\DistributedSystem\obj\Debug\DistributedSystem.csprojResolveAssemblyReference.cache
+D:\projects\distributed-collections\src\Application\DistributedSystem\obj\Debug\DistributedSystem.csproj.CoreCompileInputs.cache
+D:\projects\distributed-collections\src\Application\DistributedSystem\obj\Debug\DistributedSystem.exe
+D:\projects\distributed-collections\src\Application\DistributedSystem\obj\Debug\DistributedSystem.pdb
