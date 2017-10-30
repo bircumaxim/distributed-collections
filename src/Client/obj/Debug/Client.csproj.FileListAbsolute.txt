@@ -1,0 +1,6 @@
+D:\projects\utm\distributed-collections\src\Client\bin\Debug\Client.exe
+D:\projects\utm\distributed-collections\src\Client\bin\Debug\Client.pdb
+D:\projects\utm\distributed-collections\src\Client\obj\Debug\Client.csprojResolveAssemblyReference.cache
+D:\projects\utm\distributed-collections\src\Client\obj\Debug\Client.csproj.CoreCompileInputs.cache
+D:\projects\utm\distributed-collections\src\Client\obj\Debug\Client.exe
+D:\projects\utm\distributed-collections\src\Client\obj\Debug\Client.pdb

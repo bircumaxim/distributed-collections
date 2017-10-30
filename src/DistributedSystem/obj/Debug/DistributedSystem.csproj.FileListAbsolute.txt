@@ -1,0 +1,17 @@
+D:\projects\utm\distributed-collections\src\DistributedSystem\bin\Debug\DistributedSystem.exe
+D:\projects\utm\distributed-collections\src\DistributedSystem\bin\Debug\DistributedSystem.pdb
+D:\projects\utm\distributed-collections\src\DistributedSystem\bin\Debug\MessageBuss.dll
+D:\projects\utm\distributed-collections\src\DistributedSystem\bin\Debug\Messages.dll
+D:\projects\utm\distributed-collections\src\DistributedSystem\bin\Debug\Serialization.dll
+D:\projects\utm\distributed-collections\src\DistributedSystem\bin\Debug\Transport.dll
+D:\projects\utm\distributed-collections\src\DistributedSystem\bin\Debug\log4net.dll
+D:\projects\utm\distributed-collections\src\DistributedSystem\bin\Debug\MessageBuss.pdb
+D:\projects\utm\distributed-collections\src\DistributedSystem\bin\Debug\MessageBuss.dll.config
+D:\projects\utm\distributed-collections\src\DistributedSystem\bin\Debug\Messages.pdb
+D:\projects\utm\distributed-collections\src\DistributedSystem\bin\Debug\Serialization.pdb
+D:\projects\utm\distributed-collections\src\DistributedSystem\bin\Debug\Transport.pdb
+D:\projects\utm\distributed-collections\src\DistributedSystem\bin\Debug\log4net.xml
+D:\projects\utm\distributed-collections\src\DistributedSystem\obj\Debug\DistributedSystem.csprojResolveAssemblyReference.cache
+D:\projects\utm\distributed-collections\src\DistributedSystem\obj\Debug\DistributedSystem.csproj.CoreCompileInputs.cache
+D:\projects\utm\distributed-collections\src\DistributedSystem\obj\Debug\DistributedSystem.exe
+D:\projects\utm\distributed-collections\src\DistributedSystem\obj\Debug\DistributedSystem.pdb

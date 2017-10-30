@@ -1,0 +1,17 @@
+D:\projects\utm\distributed-collections\src\Node\bin\Debug\Node.exe
+D:\projects\utm\distributed-collections\src\Node\bin\Debug\Node.pdb
+D:\projects\utm\distributed-collections\src\Node\obj\Debug\Node.csprojResolveAssemblyReference.cache
+D:\projects\utm\distributed-collections\src\Node\obj\Debug\Node.csproj.CoreCompileInputs.cache
+D:\projects\utm\distributed-collections\src\Node\obj\Debug\Node.exe
+D:\projects\utm\distributed-collections\src\Node\obj\Debug\Node.pdb
+D:\projects\utm\distributed-collections\src\Node\bin\Debug\MessageBuss.dll
+D:\projects\utm\distributed-collections\src\Node\bin\Debug\Messages.dll
+D:\projects\utm\distributed-collections\src\Node\bin\Debug\Serialization.dll
+D:\projects\utm\distributed-collections\src\Node\bin\Debug\Transport.dll
+D:\projects\utm\distributed-collections\src\Node\bin\Debug\log4net.dll
+D:\projects\utm\distributed-collections\src\Node\bin\Debug\MessageBuss.pdb
+D:\projects\utm\distributed-collections\src\Node\bin\Debug\MessageBuss.dll.config
+D:\projects\utm\distributed-collections\src\Node\bin\Debug\Messages.pdb
+D:\projects\utm\distributed-collections\src\Node\bin\Debug\Serialization.pdb
+D:\projects\utm\distributed-collections\src\Node\bin\Debug\Transport.pdb
+D:\projects\utm\distributed-collections\src\Node\bin\Debug\log4net.xml

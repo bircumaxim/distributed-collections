@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Buss>
+    <Brokers>
+        <Broker Name="Discovery" Ip="127.0.0.1" WireProtocol="DefaultWireProtocol">
+            <Direct Name="Discovery"/>
+        </Broker>
+
+        <Broker Name="DiscoveryResponse" SocketProtocol="Udp" Ip="127.0.0.1" Port="8000" WireProtocol="DefaultWireProtocol"/>
+    </Brokers>
+</Buss>

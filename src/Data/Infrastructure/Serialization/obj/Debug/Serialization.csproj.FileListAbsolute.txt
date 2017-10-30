@@ -1,8 +1,0 @@
-D:\projects\distributed-collections\src\Data\Infrastructure\Serialization\bin\Debug\Serialization.dll
-D:\projects\distributed-collections\src\Data\Infrastructure\Serialization\bin\Debug\Serialization.pdb
-D:\projects\distributed-collections\src\Data\Infrastructure\Serialization\bin\Debug\log4net.dll
-D:\projects\distributed-collections\src\Data\Infrastructure\Serialization\bin\Debug\log4net.xml
-D:\projects\distributed-collections\src\Data\Infrastructure\Serialization\obj\Debug\Serialization.csprojResolveAssemblyReference.cache
-D:\projects\distributed-collections\src\Data\Infrastructure\Serialization\obj\Debug\Serialization.csproj.CoreCompileInputs.cache
-D:\projects\distributed-collections\src\Data\Infrastructure\Serialization\obj\Debug\Serialization.dll
-D:\projects\distributed-collections\src\Data\Infrastructure\Serialization\obj\Debug\Serialization.pdb
