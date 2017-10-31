@@ -1,37 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Xml.Serialization;
 
 namespace DistributedSystem
 {
     internal static class Program
     {
-        public static string ConfigFilePath =
-            Path.Combine(Directory.GetCurrentDirectory(), "src\\DistributedSystem\\config.xml");
+        public static string ConfigPath = Path.Combine(Directory.GetCurrentDirectory(), "DistributedSystem/config.xml");
+        public static string NodeExePath = Path.Combine(Directory.GetCurrentDirectory(), "Node/bin/Debug/Node.exe");
+        private static Config _config;
 
         public static void Main(string[] args)
         {
-            var config = new Config(ConfigFilePath);
-            var fileName = Path.Combine(Directory.GetCurrentDirectory(), "src\\Node\\bin\\Debug\\Node.exe");
+            _config = new Config(ConfigPath);
+            _config.ServerNodes.ForEach(StartProcesForNode);
+        }
 
-            config.Nodes.ForEach(node =>
+        public static void StartProcesForNode(NodeConfig nodeConfig)
+        {
+            var serverInfoArgs = new List<string>
             {
-                string argsToSned = $"{node.NodeName} {node.MulticastIp}:{node.MulticastPort} {node.TcpIp}:{node.TcpPort}"; 
-                node.ConectsTo.ForEach(nodeNmae =>
-                {
-                    var nodeToConnect = config.Nodes.FirstOrDefault(n => n.NodeName == nodeNmae);
-                    if (nodeToConnect != null)
-                    {
-                        argsToSned = argsToSned + $" {nodeToConnect.TcpIp}:{nodeToConnect.TcpPort}";
-                    }
-                });
-                Process.Start(fileName, argsToSned);
-            });
-            Console.ReadLine();
+                nodeConfig.Name,
+                nodeConfig.MulticastIpEndPoint,
+                nodeConfig.UdpIpEndPoint,
+                nodeConfig.TcpIpEndPoint,
+                nodeConfig.DataObjectsCount
+            };
+            Process.Start(NodeExePath, BuildArgs(serverInfoArgs.Concat(GetKnownIpsForNode(nodeConfig)).ToList()));
+        }
+
+        public static List<string> GetKnownIpsForNode(NodeConfig nodeConfig)
+        {
+            return nodeConfig.KnownEndPoints
+                .Select(knowedNode => _config.ServerNodes.FirstOrDefault(node => node.Name == knowedNode)?.UdpIpEndPoint)
+                .ToList();
+        }
+
+        public static string BuildArgs(List<string> argsList)
+        {
+            var args = "";
+            argsList.ForEach(argItem => args = args + $" {argItem}");
+            return args;
         }
     }
 }

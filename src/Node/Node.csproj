@@ -53,11 +53,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\RandomDataGenerator.cs" />
+    <Compile Include="Data\User.cs" />
+    <Compile Include="BytesHelper.cs" />
     <Compile Include="IRun.cs" />
     <Compile Include="Messages\DiscoveryRequest.cs" />
     <Compile Include="Messages\DiscoveryResponse.cs" />
-    <Compile Include="Node.cs" />
     <Compile Include="NodeConfig.cs" />
+    <Compile Include="ServerNode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -5,6 +5,11 @@
             <Direct Name="Discovery"/>
         </Broker>
 
-        <Broker Name="DiscoveryResponse" SocketProtocol="Udp" Ip="127.0.0.1" Port="8000" WireProtocol="DefaultWireProtocol"/>
+        <Broker Name="DiscoveryResponse" 
+                SocketProtocol="Udp" 
+                Ip="127.0.0.1" Port="8000"
+                ReceiverIp="127.0.0.1"
+                ReceiverPort="5000"
+                WireProtocol="DefaultWireProtocol"/>
     </Brokers>
 </Buss>

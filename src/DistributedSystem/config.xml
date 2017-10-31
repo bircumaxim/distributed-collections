@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<DistributedSystem>
-    <Node Name="Node1" MulticastIp="224.5.6.7" MulticastPort="7000" TcpIp="127.0.0.1" TcpPort="5000">
-        <ConnectosToNode Name="Node2"/>
+<System>
+    <Node Name="Node1" MulticastIpEndPoint="224.5.6.7:7000" UdpIpEndPoint="127.0.0.1:3000"
+          TcpIpEndPoint="127.0.0.1:5000"
+          DataObjects="15">
     </Node>
-    <Node Name="Node2" MulticastIp="224.5.6.7" MulticastPort="7000" TcpIp="127.0.0.1" TcpPort="3000"/>
-</DistributedSystem>
+</System>

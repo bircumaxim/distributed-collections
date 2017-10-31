@@ -1,26 +1,31 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Xml;
 
 namespace DistributedSystem
 {
     public class Config
     {
-        public List<NodeConfig> Nodes { get; set; }
         
+        private const string DefaultObjectsCount = "10";
+        private const string DefaultMulticastIpEndPoint = "224.5.6.7:7000";
+        
+        public List<NodeConfig> ServerNodes { get; set; }
+
         public Config(string configFilePath)
         {
             var configsXmlDocument = new XmlDocument();
             configsXmlDocument.Load(configFilePath);
-            Nodes = new List<NodeConfig>();
-
-            LoadNodesFormConfigFile(configsXmlDocument.SelectSingleNode("DistributedSystem"));
+            ServerNodes = new List<NodeConfig>();
+            LoadNodesFormConfigFile(configsXmlDocument.SelectSingleNode("System"));
         }
 
         private void LoadNodesFormConfigFile(XmlNode nodesXmlNode)
         {
             foreach (XmlElement nodeXmlElement in nodesXmlNode)
             {
-                Nodes.Add(GetNode(nodeXmlElement));
+                ServerNodes.Add(GetNode(nodeXmlElement));
             }
         }
 
@@ -30,28 +35,23 @@ namespace DistributedSystem
             {
                 var nodeConfig = new NodeConfig
                 {
-                    NodeName = nodesXmlNode.Attributes.GetNamedItem("Name").Value,
-                    MulticastIp = nodesXmlNode.Attributes.GetNamedItem("MulticastIp").Value,
-                    MulticastPort = nodesXmlNode.Attributes.GetNamedItem("MulticastPort").Value,
-                    TcpIp = nodesXmlNode.Attributes.GetNamedItem("TcpIp").Value,
-                    TcpPort = nodesXmlNode.Attributes.GetNamedItem("TcpPort").Value,
-                    ConectsTo = GetNodesToConnectTo(nodesXmlNode)
+                    Name = nodesXmlNode.Attributes.GetNamedItem("Name").Value ?? Guid.NewGuid().ToString(),
+                    MulticastIpEndPoint = nodesXmlNode.Attributes.GetNamedItem("MulticastIpEndPoint").Value ?? DefaultMulticastIpEndPoint,
+                    UdpIpEndPoint = nodesXmlNode.Attributes.GetNamedItem("UdpIpEndPoint").Value,
+                    TcpIpEndPoint = nodesXmlNode.Attributes.GetNamedItem("TcpIpEndPoint").Value,
+                    DataObjectsCount = nodesXmlNode.Attributes.GetNamedItem("DataObjects").Value ?? DefaultObjectsCount,
+                    KnownEndPoints = GetKnownEndPoints(nodesXmlNode)
                 };
-            
+
                 return nodeConfig;
             }
-
             return null;
         }
-        
-        private List<string> GetNodesToConnectTo(XmlNode nodesXmlNode)
+
+        private List<string> GetKnownEndPoints(XmlNode nodesXmlNode)
         {
-            var nodesToConnectTo = new List<string>();
-            foreach (XmlElement nodeXmlElement in nodesXmlNode)
-            {
-                nodesToConnectTo.Add(nodeXmlElement.Attributes.GetNamedItem("Name").Value);
-            }
-            return nodesToConnectTo;
+            return (from XmlElement nodeXmlElement in nodesXmlNode
+                select nodeXmlElement.Attributes.GetNamedItem("Name").Value).ToList();
         }
     }
 }

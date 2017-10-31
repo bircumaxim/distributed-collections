@@ -1,10 +1,5 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Xml.Serialization;
-using Serialization.WireProtocol;
 
 namespace Node
 {
@@ -12,28 +7,35 @@ namespace Node
     {
         public static void Main(string[] args)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(NodeConfig));
-//            String config = "";
-            foreach (var s in args)
-            {
-                Console.WriteLine(s);
-            }
-//            using (TextReader reader = new StringReader(Encoding.ASCII.GetString(args[0].ToCharArray().Select(c => (byte)c).ToArray())))
-//            {
-//                NodeConfig result = (NodeConfig) serializer.Deserialize(reader);
-//                Console.WriteLine(result.NodeName);
-//            }
-//              
-            
-            
-            Console.ReadLine();
+            var nodeConfig = args.Length > 0 ? GetNodeConfigFromArgs(args) : new NodeConfig();
+            var node = new ServerNode(nodeConfig);
+            node.StartAsync();
+            Console.WriteLine(nodeConfig);
+            Console.WriteLine("Press any key to stop server node.");
+            Console.ReadKey();
         }
 
-        private static void StartNode()
+        public static NodeConfig GetNodeConfigFromArgs(string[] args)
         {
-            var node = new Node("test", new IPEndPoint(IPAddress.Parse("224.5.6.7"), 7000),
-                new IPEndPoint(IPAddress.Parse("127.0.0.1"), 5000), new DefaultWireProtocol());
-            Console.ReadKey();
+            var nodeConfig = new NodeConfig
+            {
+                Name = args[0],
+                MulticastIpEndPoint = GetIpEndPointFromString(args[1]),
+                UdpIpEndPoint = GetIpEndPointFromString(args[2]),
+                TcpIpEndPoint = GetIpEndPointFromString(args[3]),
+                DataObjectsCount = Convert.ToInt32(args[4])
+            };
+            for (var i = 5; i < args.Length; i++)
+            {
+                nodeConfig.KnownEndPoints.Add(GetIpEndPointFromString(args[i]));
+            }
+            return nodeConfig;
+        }
+
+        public static IPEndPoint GetIpEndPointFromString(string address)
+        {
+            var addressParts = address.Split(':');
+            return new IPEndPoint(IPAddress.Parse(addressParts[0]), Convert.ToInt32(addressParts[1]));
         }
     }
 }
