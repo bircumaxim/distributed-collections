@@ -8,11 +8,13 @@ namespace Node
         public static void Main(string[] args)
         {
             var nodeConfig = args.Length > 0 ? GetNodeConfigFromArgs(args) : new NodeConfig();
-            var node = new ServerNode(nodeConfig);
-            node.StartAsync();
+            var nodeService = new NodeService(nodeConfig);
+            nodeService.StartAsync();
             Console.WriteLine(nodeConfig);
-            Console.WriteLine("Press any key to stop server node.");
             Console.ReadKey();
+            nodeService.Stop();
+            Console.WriteLine("\nServer stoped.\nPress any key to exit.");
+            Console.ReadKey(); 
         }
 
         public static NodeConfig GetNodeConfigFromArgs(string[] args)

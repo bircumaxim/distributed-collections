@@ -33,7 +33,7 @@ namespace Node
 
             if (KnownEndPoints.Count > 0)
             {
-                info = info + "KnownEndPoints: \n";
+                info = info + "Connected to: \n";
                 KnownEndPoints.ForEach(ip => info = info + $"\t{ip}\n");
             }
             return info;

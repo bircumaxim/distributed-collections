@@ -1,7 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <System>
+    <Node Name="Node2" MulticastIpEndPoint="224.5.6.7:7000" UdpIpEndPoint="127.0.0.1:3001"
+          TcpIpEndPoint="127.0.0.1:5001"
+          DataObjects="15">
+    </Node>
+    
     <Node Name="Node1" MulticastIpEndPoint="224.5.6.7:7000" UdpIpEndPoint="127.0.0.1:3000"
           TcpIpEndPoint="127.0.0.1:5000"
           DataObjects="15">
-    </Node>
+        <Node Name="Node2"/>
+    </Node>  
 </System>

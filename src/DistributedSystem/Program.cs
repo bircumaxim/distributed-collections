@@ -33,7 +33,7 @@ namespace DistributedSystem
         public static List<string> GetKnownIpsForNode(NodeConfig nodeConfig)
         {
             return nodeConfig.KnownEndPoints
-                .Select(knowedNode => _config.ServerNodes.FirstOrDefault(node => node.Name == knowedNode)?.UdpIpEndPoint)
+                .Select(knowedNode => _config.ServerNodes.FirstOrDefault(node => node.Name == knowedNode)?.TcpIpEndPoint)
                 .ToList();
         }
 

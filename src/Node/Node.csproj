@@ -54,12 +54,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\RandomDataGenerator.cs" />
-    <Compile Include="Data\User.cs" />
+    <Compile Include="Data\Employee.cs" />
     <Compile Include="BytesHelper.cs" />
+    <Compile Include="DiscoveryService.cs" />
     <Compile Include="IRun.cs" />
+    <Compile Include="Messages\ServerNodeData.cs" />
     <Compile Include="Messages\DiscoveryRequest.cs" />
     <Compile Include="Messages\DiscoveryResponse.cs" />
+    <Compile Include="Messages\GetDataMessage.cs" />
     <Compile Include="NodeConfig.cs" />
+    <Compile Include="NodeService.cs" />
     <Compile Include="ServerNode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
