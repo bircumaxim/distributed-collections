@@ -54,14 +54,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Mediator.cs" />
-    <Compile Include="Messages\DiscoveryRequest.cs" />
-    <Compile Include="Messages\DiscoveryResponse.cs" />
-    <Compile Include="Messages\GetDataMessage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="config.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{B039ACD5-C3FD-4EEB-A0E6-8DE7F6B1C8DD}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Messages\Messages.csproj">
+      <Project>{C836BBF4-339A-4045-A93B-696185ED1072}</Project>
+      <Name>Messages</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

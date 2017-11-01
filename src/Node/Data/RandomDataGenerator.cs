@@ -1,4 +1,5 @@
 ﻿using System;
+using Common.Models;
 
 namespace Node.Data
 {
@@ -7,7 +8,7 @@ namespace Node.Data
         private static readonly Random Rand = new Random(DateTime.Now.Second);
         private static readonly string[] Names = { "aaron", "abdul", "abe", "abel", "abraham", "adam", "adan", "adolfo", "adolph", "adrian", "abby", "abigail", "adele", "adrian"};
         
-        public static Employee GetNewRandomUser()
+        public static Employee GetNewRandomEmployee()
         {
             return new Employee
             {

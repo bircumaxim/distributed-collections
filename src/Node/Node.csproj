@@ -53,20 +53,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\DataManager.cs" />
     <Compile Include="Data\RandomDataGenerator.cs" />
-    <Compile Include="Data\Employee.cs" />
     <Compile Include="BytesHelper.cs" />
     <Compile Include="DiscoveryService.cs" />
     <Compile Include="IRun.cs" />
-    <Compile Include="Messages\ServerNodeData.cs" />
-    <Compile Include="Messages\DiscoveryRequest.cs" />
-    <Compile Include="Messages\DiscoveryResponse.cs" />
-    <Compile Include="Messages\GetDataMessage.cs" />
     <Compile Include="NodeConfig.cs" />
     <Compile Include="NodeService.cs" />
     <Compile Include="ServerNode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{B039ACD5-C3FD-4EEB-A0E6-8DE7F6B1C8DD}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Messages\Messages.csproj">
+      <Project>{c836bbf4-339a-4045-a93b-696185ed1072}</Project>
+      <Name>Messages</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

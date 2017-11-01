@@ -1,13 +1,16 @@
-﻿namespace Node
+﻿using Node.Data;
+
+namespace Node
 {
     public class NodeService
     {
         private readonly ServerNode _serverNode;
         private readonly DiscoveryService _discoveryService;
-
+        
         public NodeService(NodeConfig nodeConfig)
         {
-            _serverNode = new ServerNode(nodeConfig.TcpIpEndPoint.Port, nodeConfig.KnownEndPoints);
+            var dataManager = new DataManager(nodeConfig.DataObjectsCount);
+            _serverNode = new ServerNode(nodeConfig.TcpIpEndPoint.Port, nodeConfig.KnownEndPoints, dataManager);
             _discoveryService = new DiscoveryService(nodeConfig.MulticastIpEndPoint, nodeConfig.TcpIpEndPoint, nodeConfig.UdpIpEndPoint);
         }
 

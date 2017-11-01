@@ -3,7 +3,7 @@ using Serialization;
 using Serialization.Deserializer;
 using Serialization.Serializer;
 
-namespace Node.Data
+namespace Common.Models
 {
     public class Employee : Message
     {

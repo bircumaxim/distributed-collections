@@ -1,9 +1,7 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
+using Common;
 using MessageBuss.Buss;
 using MessageBuss.Buss.Events;
-using Node.Messages;
-
 
 namespace Node
 {
@@ -26,7 +24,7 @@ namespace Node
 
         public void StartAsync()
         {
-            _multicastBuss = BussFactory.Instance.GetBussFor("Dibil", _multicastIpEndPoint,
+            _multicastBuss = BussFactory.Instance.GetBussFor("multicast", _multicastIpEndPoint,
                 _multicastIpEndPoint, BrokerProtocolType.UdpMulticast);
             _multicastBuss.MessageReceived += OnMessageReceivedFromMulticastGroup;
         }
@@ -50,12 +48,8 @@ namespace Node
         private void SendDiscoveryResponse(MessegeReceviedEventArgs args)
         {
             var discoveryRequest = (DiscoveryRequest) args.Payload;
-            if (_udpBuss == null)
-            {
-                _udpBuss?.Dispose();
-                _udpBuss = BussFactory.Instance.GetBussFor("Huinea", discoveryRequest.BrockerIpEndPoint,
-                    _udpIpEndPoint);
-            }
+            _udpBuss = BussFactory.Instance.GetBussFor("udp", discoveryRequest.BrockerIpEndPoint,
+                _udpIpEndPoint);
             _udpBuss.Publish(
                 discoveryRequest.ExchangeName,
                 discoveryRequest.QueueName,
