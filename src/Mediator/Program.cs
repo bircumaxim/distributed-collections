@@ -58,9 +58,9 @@ namespace Mediator
 
         private static void OnMessageReceivedFromTcpConnector(object sender, MessageReceivedEventArgs args)
         {
-            if (args.Message.MessageTypeName == typeof(ServerNodeDataMessage).Name)
+            if (args.Message.MessageTypeName == typeof(DataResponseMessage).Name)
             {
-                var message = (ServerNodeDataMessage) args.Message;
+                var message = (DataResponseMessage) args.Message;
                 Console.WriteLine(message.Employees.Length);
             }
         }
@@ -69,15 +69,15 @@ namespace Mediator
         {
             if (args.NewState == ConnectionState.Connected)
             {
-                _tcpConnector.SendMessage(new GetDataMessage());
+                _tcpConnector.SendMessage(new DataRequestMessage());
             }
         }
 
         private static void OnMessageReceived(object sender, MessegeReceviedEventArgs args)
         {
-            if (args.Payload.MessageTypeName == typeof(DiscoveryResponse).Name)
+            if (args.Payload.MessageTypeName == typeof(DiscoveryResponseMessage).Name)
             {
-                var payload = (DiscoveryResponse) args.Payload;
+                var payload = (DiscoveryResponseMessage) args.Payload;
                 Console.WriteLine(payload.NodIpEndPoint.ToString());
             }
             if (args.Payload.MessageTypeName == typeof(SubscribeSuccessMessage).Name)
@@ -86,7 +86,7 @@ namespace Mediator
                 {
                     while (true)
                     {
-                        var discoveryRequest = new DiscoveryRequest
+                        var discoveryRequest = new DiscoveryRequestMessage
                         {
                             ExchangeName = "Discovery",
                             QueueName = "discovery-responses",

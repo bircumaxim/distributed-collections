@@ -10,3 +10,4 @@ D:\projects\utm\distributed-collections\src\Common\obj\Debug\Common.csprojResolv
 D:\projects\utm\distributed-collections\src\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
 D:\projects\utm\distributed-collections\src\Common\obj\Debug\Common.dll
 D:\projects\utm\distributed-collections\src\Common\obj\Debug\Common.pdb
+D:\projects\utm\distributed-collections\src\Common\bin\Debug\Serialize.Linq.dll

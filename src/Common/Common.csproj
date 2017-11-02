@@ -39,20 +39,24 @@
     <Reference Include="Serialization, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\..\message-broker\src\MessageBorker\Application\MessageBuss\bin\Debug\Serialization.dll</HintPath>
     </Reference>
+    <Reference Include="Serialize.Linq, Version=1.3.1.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Serialize.Linq.1.4.0\lib\net45\Serialize.Linq.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DiscoveryRequest.cs" />
-    <Compile Include="DiscoveryResponse.cs" />
-    <Compile Include="GetDataMessage.cs" />
+    <Compile Include="DiscoveryRequestMessage.cs" />
+    <Compile Include="DiscoveryResponseMessage.cs" />
+    <Compile Include="DataRequestMessage.cs" />
+    <Compile Include="DataRequestMessageBuilder.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Filters\Filter.cs" />
-    <Compile Include="Models\Filters\GroupByFilter.cs" />
+    <Compile Include="Models\Filters\WhereFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServerNodeDataMessage.cs" />
+    <Compile Include="DataResponseMessage.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

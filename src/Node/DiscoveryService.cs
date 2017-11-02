@@ -39,7 +39,7 @@ namespace Node
 
         private void OnMessageReceivedFromMulticastGroup(object sender, MessegeReceviedEventArgs args)
         {
-            if (args.Payload.MessageTypeName == typeof(DiscoveryRequest).Name)
+            if (args.Payload.MessageTypeName == typeof(DiscoveryRequestMessage).Name)
             {
                 SendDiscoveryResponse(args);
             }
@@ -47,13 +47,13 @@ namespace Node
 
         private void SendDiscoveryResponse(MessegeReceviedEventArgs args)
         {
-            var discoveryRequest = (DiscoveryRequest) args.Payload;
+            var discoveryRequest = (DiscoveryRequestMessage) args.Payload;
             _udpBuss = BussFactory.Instance.GetBussFor("udp", discoveryRequest.BrockerIpEndPoint,
                 _udpIpEndPoint);
             _udpBuss.Publish(
                 discoveryRequest.ExchangeName,
                 discoveryRequest.QueueName,
-                new DiscoveryResponse {NodIpEndPoint = _tcIpEndPoint}
+                new DiscoveryResponseMessage {NodIpEndPoint = _tcIpEndPoint}
             );
         }
     }

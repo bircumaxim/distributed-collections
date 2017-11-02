@@ -5,7 +5,7 @@ using Serialization.Serializer;
 
 namespace Common
 {
-    public class DiscoveryResponse : Message
+    public class DiscoveryResponseMessage : Message
     {
         public IPEndPoint NodIpEndPoint { get; set; }
         

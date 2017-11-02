@@ -5,7 +5,7 @@ using Serialization.Serializer;
 
 namespace Common
 {
-    public class DiscoveryRequest : PayloadMessage
+    public class DiscoveryRequestMessage : PayloadMessage
     {
         public IPEndPoint BrockerIpEndPoint { get; set; }
         public string ExchangeName { get; set; }

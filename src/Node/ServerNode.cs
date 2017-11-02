@@ -21,7 +21,7 @@ namespace Node
         private readonly List<IConnector> _tcpConnectors;
         private readonly List<IConnector> _knowedServerNodesConnectors;
         private readonly DataManager _dataManager;
-        private ServerNodeDataMessage _messageToBeSent;
+        private DataResponseMessage _responseMessageToBeSent;
         private IConnector _mediatorConnector;
 
         public ServerNode(int tcpPort, List<IPEndPoint> knownEndPoints, DataManager dataManager)
@@ -63,11 +63,11 @@ namespace Node
 
         private void OnMessageReceivedFromTcpClient(object sender, MessageReceivedEventArgs args)
         {
-            if (args.Message.MessageTypeName == typeof(GetDataMessage).Name)
+            if (args.Message.MessageTypeName == typeof(DataRequestMessage).Name)
             {
                 HandleGetDataMessage(args);
             }
-            if (args.Message.MessageTypeName == typeof(ServerNodeDataMessage).Name)
+            if (args.Message.MessageTypeName == typeof(DataResponseMessage).Name)
             {
                 HandleServerNodeDataMessage(args);
             }
@@ -95,17 +95,17 @@ namespace Node
 
         private void HandleGetDataMessage(MessageReceivedEventArgs args)
         {
-            var message = (GetDataMessage) args.Message;
+            var message = (DataRequestMessage) args.Message;
             
-            _messageToBeSent = new ServerNodeDataMessage
+            _responseMessageToBeSent = new DataResponseMessage
             {
                 Employees = _dataManager.GetEmployees().ToArray()
             };
             
             if (message.IsFromAServerNode || _knowedServerNodesConnectors.Count == 0)
             {
-                _messageToBeSent.IsLastKnownServerNode = message.IsLastKnownServerNode;
-                args.Connector.SendMessage(_messageToBeSent);
+                _responseMessageToBeSent.IsLastKnownServerNode = message.IsLastKnownServerNode;
+                args.Connector.SendMessage(_responseMessageToBeSent);
             }
             else
             {
@@ -116,22 +116,22 @@ namespace Node
 
         private void HandleServerNodeDataMessage(MessageReceivedEventArgs args)
         {
-            var message = (ServerNodeDataMessage) args.Message;
-            _messageToBeSent.Employees = _messageToBeSent.Employees.Concat(message.Employees).ToArray();
+            var message = (DataResponseMessage) args.Message;
+            _responseMessageToBeSent.Employees = _responseMessageToBeSent.Employees.Concat(message.Employees).ToArray();
             if (message.IsLastKnownServerNode)
             {
-                _mediatorConnector.SendMessage(_messageToBeSent);
-                _messageToBeSent = null;
+                _mediatorConnector.SendMessage(_responseMessageToBeSent);
+                _responseMessageToBeSent = null;
             }
         }
 
-        private void SendGetDataMessageToKnownServerNodes(GetDataMessage message)
+        private void SendGetDataMessageToKnownServerNodes(DataRequestMessage requestMessage)
         {
-            message.IsFromAServerNode = true;
+            requestMessage.IsFromAServerNode = true;
             for (var i = 0; i < _knowedServerNodesConnectors.Count; i++)
             {
-                message.IsLastKnownServerNode = i == _knowedServerNodesConnectors.Count - 1;
-                _knowedServerNodesConnectors[i].SendMessage(message);
+                requestMessage.IsLastKnownServerNode = i == _knowedServerNodesConnectors.Count - 1;
+                _knowedServerNodesConnectors[i].SendMessage(requestMessage);
             }
         }
     }
