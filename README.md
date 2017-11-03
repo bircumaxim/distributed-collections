@@ -1,9 +1,7 @@
 # MessageBroker
 ###### Simple distributed-collections system or build for educational purposes only. You could check bellow a short description and a guid of how to configure and to get started fast.
-#
-#
 <p align="center">
-  <img  src="https://lh5.googleusercontent.com/z_BkyaNHylsg52kWCCyEuKj1d5W9_AgM1jLIaGFqiiUKI3J8lJjlirrUfM8FOCOsLu-TfnOPMGS8E4c=w1920-h959-rw">
+  <img  src="https://github.com/bircumaxim/distributed-collections/blob/master/doc/system-diagram.png">
 </p>
 
 
@@ -97,7 +95,7 @@ Now let's configure and set up the graph of nodes
 
 We will add 6 server nodes and will connect them as in diagram bellow.
 <p align="center">
-  <img  width="500"src="https://lh6.googleusercontent.com/FLJxeQfEU4oFHvoK_GRh-qyJhVLr5ZhxHdHVHPw_fYiaX09BS8FybRgdB2l4QkFg-H0tAnH8KAnlfmQ=w1920-h959-rw">
+  <img  width="500"src="https://github.com/bircumaxim/distributed-collections/blob/master/doc/example-graph.png">
 </p>
 
 
