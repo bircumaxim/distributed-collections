@@ -36,10 +36,10 @@ namespace DistributedSystem
                 var nodeConfig = new NodeConfig
                 {
                     Name = nodesXmlNode.Attributes.GetNamedItem("Name").Value ?? Guid.NewGuid().ToString(),
-                    MulticastIpEndPoint = nodesXmlNode.Attributes.GetNamedItem("MulticastIpEndPoint").Value ?? DefaultMulticastIpEndPoint,
+                    MulticastIpEndPoint = nodesXmlNode.Attributes.GetNamedItem("MulticastIpEndPoint")?.Value ?? DefaultMulticastIpEndPoint,
                     UdpIpEndPoint = nodesXmlNode.Attributes.GetNamedItem("UdpIpEndPoint").Value,
                     TcpIpEndPoint = nodesXmlNode.Attributes.GetNamedItem("TcpIpEndPoint").Value,
-                    DataObjectsCount = nodesXmlNode.Attributes.GetNamedItem("DataObjects").Value ?? DefaultObjectsCount,
+                    DataObjectsCount = nodesXmlNode.Attributes.GetNamedItem("DataObjects")?.Value ?? DefaultObjectsCount,
                     KnownEndPoints = GetKnownEndPoints(nodesXmlNode)
                 };
 

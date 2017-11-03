@@ -16,13 +16,12 @@ namespace Common.Models.Filters
 
         protected override void SetExpression(Expression expression)
         {
-            Predicate = (Expression<Func<Employee, bool>>) expression;
+            Predicate = expression.ToExpressionNode().ToBooleanExpression<Employee>();
         }
 
         public override Employee[] Execute(Employee[] listItems)
         {
-            var predicate = Predicate.ToExpressionNode().ToBooleanExpression<Employee>().Compile();
-            return listItems.Where(predicate).ToArray();
+            return listItems.Where(Predicate.Compile()).ToArray();
         }
     }
 }

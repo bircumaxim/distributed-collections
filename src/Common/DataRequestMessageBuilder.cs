@@ -8,7 +8,7 @@ namespace Common
 {
     public class DataRequestMessageBuilder
     {
-        private long _requestTimeout;
+        private int _requestTimeout;
         private readonly List<Filter<Employee>> _filters;
 
         public DataRequestMessageBuilder()
@@ -24,8 +24,26 @@ namespace Common
             });
             return this;
         }
+        
+        public DataRequestMessageBuilder OrderBy(Expression<Func<Employee, string>> func)
+        {
+            _filters.Add(new StringOrderByFilter
+            {
+                Func = func
+            });
+            return this;
+        }
+        
+        public DataRequestMessageBuilder OrderBy(Expression<Func<Employee, int>> func)
+        {
+            _filters.Add(new IntOrderByFilter
+            {
+                Func = func
+            });
+            return this;
+        }
 
-        public DataRequestMessageBuilder WithTimeout(long requestTimeout)
+        public DataRequestMessageBuilder WithTimeout(int requestTimeout)
         {
             _requestTimeout = requestTimeout;
             return this;

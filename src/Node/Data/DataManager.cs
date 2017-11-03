@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Common.Models;
+using Common.Models.Filters;
 
 namespace Node.Data
 {
@@ -21,9 +23,15 @@ namespace Node.Data
             }
         }
 
-        public List<Employee> GetEmployees()
+        public Employee[] GetEmployees(List<Filter<Employee>> filters = null)
         {
-            return _employees;
+            var employees = _employees.Select(empl => empl).ToArray();
+            if (filters != null)
+                foreach (var filter in filters)
+                {
+                    employees = filter.Execute(employees.ToArray());
+                }
+            return employees;
         }
     }
 }

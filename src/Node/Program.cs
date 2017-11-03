@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using Messages.Payload;
 
 namespace Node
 {
@@ -7,6 +8,8 @@ namespace Node
     {
         public static void Main(string[] args)
         {
+            var payloadMessage = new PayloadMessage();
+
             var nodeConfig = args.Length > 0 ? GetNodeConfigFromArgs(args) : new NodeConfig();
             var nodeService = new NodeService(nodeConfig);
             nodeService.StartAsync();

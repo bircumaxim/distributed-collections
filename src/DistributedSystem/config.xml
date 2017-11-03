@@ -1,13 +1,40 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Node:
+        Name - {required, unique}
+        MulticastIpEndPoint - {default = 224.5.6.7:7000, unique}
+        UdpIpEndPoint - {required, unique}
+        TcpIpEndPoint - {required, unique}
+        DataObjects - {default = 10}
+        
+        Each node can have inner Nodes to which should be provided the Name 
+        and to which the root node will connect.
+-->
 <System>
-    <Node Name="Node2" MulticastIpEndPoint="224.5.6.7:7000" UdpIpEndPoint="127.0.0.1:3001"
-          TcpIpEndPoint="127.0.0.1:5001"
-          DataObjects="15">
+    <Node Name="Node1" UdpIpEndPoint="127.0.0.1:3001" TcpIpEndPoint="127.0.0.1:5001"/>
+
+    <Node Name="Node2" UdpIpEndPoint="127.0.0.1:3002" TcpIpEndPoint="127.0.0.1:5002">
+        <Node Name="Node4"/>
     </Node>
-    
-    <Node Name="Node1" MulticastIpEndPoint="224.5.6.7:7000" UdpIpEndPoint="127.0.0.1:3000"
-          TcpIpEndPoint="127.0.0.1:5000"
-          DataObjects="15">
+
+    <Node Name="Node3" UdpIpEndPoint="127.0.0.1:3003" TcpIpEndPoint="127.0.0.1:5003">
+        <Node Name="Node5"/>
+    </Node>
+
+    <Node Name="Node4" UdpIpEndPoint="127.0.0.1:3004" TcpIpEndPoint="127.0.0.1:5004">
+        <Node Name="Node6"/>
+        <Node Name="Node5"/>
         <Node Name="Node2"/>
-    </Node>  
+    </Node>
+
+    <Node Name="Node5" UdpIpEndPoint="127.0.0.1:3005" TcpIpEndPoint="127.0.0.1:5005">
+        <Node Name="Node6"/>
+        <Node Name="Node4"/>
+        <Node Name="Node3"/>
+    </Node>
+
+    <Node Name="Node6" UdpIpEndPoint="127.0.0.1:3006" TcpIpEndPoint="127.0.0.1:5006">
+        <Node Name="Node4"/>
+        <Node Name="Node5"/>
+    </Node>
 </System>

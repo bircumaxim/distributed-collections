@@ -22,7 +22,7 @@ namespace Common.Models.Filters
         {
             base.Deserialize(deserializer);
             var expression = new ExpressionSerializer(new BinarySerializer()).Deserialize(new MemoryStream(deserializer.ReadByteArray()));
-            SetExpression(expression.ToExpressionNode().ToBooleanExpression<Employee>());
+            SetExpression(expression);
         }
 
         protected abstract Expression GetExpression();

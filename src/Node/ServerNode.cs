@@ -5,8 +5,8 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 using Common;
-using Messages;
 using Node.Data;
+using Node.Events;
 using Serialization.WireProtocol;
 using Transport;
 using Transport.Connectors;
@@ -23,15 +23,19 @@ namespace Node
         private readonly DataManager _dataManager;
         private DataResponseMessage _responseMessageToBeSent;
         private IConnector _mediatorConnector;
+        private long _totalDataQunatity;
+        private readonly List<IPEndPoint> _knownEndPoints;
+        public event DataQuantityEventArgsEvemtHandler DataQunatityComputed;
 
         public ServerNode(int tcpPort, List<IPEndPoint> knownEndPoints, DataManager dataManager)
         {
+            _knownEndPoints = knownEndPoints;
             _dataManager = dataManager;
             _tcpConnectionManager = new TcpConnectionManager(tcpPort, new DefaultWireProtocol());
             _tcpConnectionManager.ConnectorConnected += OnTcpClientConnected;
             _tcpConnectors = new List<IConnector>();
             _knowedServerNodesConnectors = new List<IConnector>();
-            knownEndPoints.ForEach(AddKnownServerConnector);
+            _totalDataQunatity = BytesHelper.GetDataSizeInBytes(_dataManager.GetEmployees().ToList());
         }
 
         #region IRun methods
@@ -65,11 +69,19 @@ namespace Node
         {
             if (args.Message.MessageTypeName == typeof(DataRequestMessage).Name)
             {
-                HandleGetDataMessage(args);
+                HandleDataRequest(args);
             }
             if (args.Message.MessageTypeName == typeof(DataResponseMessage).Name)
             {
-                HandleServerNodeDataMessage(args);
+                HandleDataResponse(args);
+            }
+            if (args.Message.MessageTypeName == typeof(DataQuantityRequestMessage).Name)
+            {
+                HandleDataQunatityRequest(args);
+            }
+            if (args.Message.MessageTypeName == typeof(DataQuantityResponseMessage).Name)
+            {
+                HandleDataQunatityResponse(args);
             }
         }
 
@@ -93,15 +105,15 @@ namespace Node
             _knowedServerNodesConnectors.Add(tcpConnector);
         }
 
-        private void HandleGetDataMessage(MessageReceivedEventArgs args)
+        private void HandleDataRequest(MessageReceivedEventArgs args)
         {
             var message = (DataRequestMessage) args.Message;
-            
+
             _responseMessageToBeSent = new DataResponseMessage
             {
-                Employees = _dataManager.GetEmployees().ToArray()
+                Employees = _dataManager.GetEmployees(message.Filters)
             };
-            
+
             if (message.IsFromAServerNode || _knowedServerNodesConnectors.Count == 0)
             {
                 _responseMessageToBeSent.IsLastKnownServerNode = message.IsLastKnownServerNode;
@@ -114,7 +126,7 @@ namespace Node
             }
         }
 
-        private void HandleServerNodeDataMessage(MessageReceivedEventArgs args)
+        private void HandleDataResponse(MessageReceivedEventArgs args)
         {
             var message = (DataResponseMessage) args.Message;
             _responseMessageToBeSent.Employees = _responseMessageToBeSent.Employees.Concat(message.Employees).ToArray();
@@ -133,6 +145,48 @@ namespace Node
                 requestMessage.IsLastKnownServerNode = i == _knowedServerNodesConnectors.Count - 1;
                 _knowedServerNodesConnectors[i].SendMessage(requestMessage);
             }
+        }
+
+        private void HandleDataQunatityRequest(MessageReceivedEventArgs args)
+        {
+            var message = (DataQuantityRequestMessage) args.Message;
+            var dataQuantityResponseMessage = new DataQuantityResponseMessage
+            {
+                Quantity = BytesHelper.GetDataSizeInBytes(_dataManager.GetEmployees().ToList()),
+                IsLastServerNode = message.IsLastServerNode
+            };
+            args.Connector.SendMessage(dataQuantityResponseMessage);
+        }
+
+        private void HandleDataQunatityResponse(MessageReceivedEventArgs args)
+        {
+            var message = (DataQuantityResponseMessage) args.Message;
+            _totalDataQunatity += message.Quantity;
+            if (message.IsLastServerNode)
+            {
+                DataQunatityComputed?.Invoke(this, new DataQuantityEventArgs(_totalDataQunatity));
+                _totalDataQunatity = 0;
+            }
+        }
+        
+        public void GetDataQuantity()
+        {
+            var dataQuantityRequestMessage = new DataQuantityRequestMessage();
+            _totalDataQunatity = BytesHelper.GetDataSizeInBytes(_dataManager.GetEmployees().ToList());
+            if (_knowedServerNodesConnectors.Count == 0)
+            {
+                DataQunatityComputed?.Invoke(this, new DataQuantityEventArgs(_totalDataQunatity));
+            }
+            for (int i = 0; i < _knowedServerNodesConnectors.Count; i++)
+            {
+                dataQuantityRequestMessage.IsLastServerNode = i == _knowedServerNodesConnectors.Count - 1;
+                _knowedServerNodesConnectors[i].SendMessage(dataQuantityRequestMessage);
+            }
+        }
+
+        public void ConnectoToKnowServers()
+        {
+            _knownEndPoints.ForEach(AddKnownServerConnector);
         }
     }
 }

@@ -42,6 +42,12 @@
     <Reference Include="Serialization, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\..\message-broker\src\MessageBorker\Application\MessageBuss\bin\Debug\Serialization.dll</HintPath>
     </Reference>
+    <Reference Include="Serialize.Linq">
+      <HintPath>..\packages\Serialize.Linq.1.4.0\lib\net45\Serialize.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Serialize.Linq, Version=1.3.1.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Serialize.Linq.1.3.2.1\lib\net45\Serialize.Linq.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -53,22 +59,27 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Mediator.cs" />
+    <Compile Include="ClientConnecionManager.cs" />
+    <Compile Include="Config.cs" />
+    <Compile Include="Events\ServerDiscoveredEventArgs.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServerNodeConnectionManager.cs" />
+    <Compile Include="Services\DiscoveryService.cs" />
+    <Compile Include="Services\MediatorService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="config.xml" />
+    <Content Include="mediator-config.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{B039ACD5-C3FD-4EEB-A0E6-8DE7F6B1C8DD}</Project>
       <Name>Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Messages\Messages.csproj">
-      <Project>{C836BBF4-339A-4045-A93B-696185ED1072}</Project>
-      <Name>Messages</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

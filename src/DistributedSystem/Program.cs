@@ -1,7 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Threading;
+using Common;
+using Serialization.WireProtocol;
+using Transport.Connectors.UdpMulticast;
 
 namespace DistributedSystem
 {
@@ -15,6 +21,19 @@ namespace DistributedSystem
         {
             _config = new Config(ConfigPath);
             _config.ServerNodes.ForEach(StartProcesForNode);
+            SendConnectGraphMessage();
+        }
+
+        private static void SendConnectGraphMessage()
+        {
+            Thread.Sleep(1000);
+            var list = _config.ServerNodes.Select(node => node.MulticastIpEndPoint).Distinct().ToList();
+            list.ForEach(ip =>
+            {
+                var ipParts = ip.Split(':');
+                var ipEndPoint = new IPEndPoint(IPAddress.Parse(ipParts[0]), Convert.ToInt32(ipParts[1]));
+                new UdpMulticastSender(ipEndPoint, new DefaultWireProtocol(), 4500).Send(new ConnectTheGraphMessage());
+            });   
         }
 
         public static void StartProcesForNode(NodeConfig nodeConfig)
@@ -27,13 +46,15 @@ namespace DistributedSystem
                 nodeConfig.TcpIpEndPoint,
                 nodeConfig.DataObjectsCount
             };
-            Process.Start(NodeExePath, BuildArgs(serverInfoArgs.Concat(GetKnownIpsForNode(nodeConfig)).ToList()));
+            var knownIpsForNode = GetKnownIpsForNode(nodeConfig);
+            Process.Start(NodeExePath, BuildArgs(serverInfoArgs.Concat(knownIpsForNode).ToList()));
         }
 
         public static List<string> GetKnownIpsForNode(NodeConfig nodeConfig)
         {
             return nodeConfig.KnownEndPoints
-                .Select(knowedNode => _config.ServerNodes.FirstOrDefault(node => node.Name == knowedNode)?.TcpIpEndPoint)
+                .Select(knowedNode =>
+                    _config.ServerNodes.FirstOrDefault(node => node.Name == knowedNode)?.TcpIpEndPoint)
                 .ToList();
         }
 

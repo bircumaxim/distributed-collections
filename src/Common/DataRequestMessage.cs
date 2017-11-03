@@ -13,7 +13,7 @@ namespace Common
     {
         public bool IsFromAServerNode { get; set; }
         public bool IsLastKnownServerNode { get; set; }
-        public long RequestTimeout { get; set; }
+        public int RequestTimeout { get; set; }
         public List<Filter<Employee>> Filters { get; set; }
 
         public DataRequestMessage()
@@ -26,7 +26,7 @@ namespace Common
             base.Serialize(serializer);
             serializer.WriteBoolean(IsFromAServerNode);
             serializer.WriteBoolean(IsLastKnownServerNode);
-            serializer.WriteInt64(RequestTimeout);
+            serializer.WriteInt32(RequestTimeout);
             serializer.WriteInt32(Filters.Count);
             Filters.ForEach(fitler => serializer.WriteByteArray(GetBytesFormFilter(fitler)));
         }
@@ -36,7 +36,7 @@ namespace Common
             base.Deserialize(deserializer);
             IsFromAServerNode = deserializer.ReadBoolean();
             IsLastKnownServerNode = deserializer.ReadBoolean();
-            RequestTimeout = deserializer.ReadInt64();
+            RequestTimeout = deserializer.ReadInt32();
             var filtersCount = deserializer.ReadInt32();
             for (var i = 0; i < filtersCount; i++)
             {

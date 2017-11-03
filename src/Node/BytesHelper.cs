@@ -1,19 +1,25 @@
-﻿using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
+﻿using System.Collections.Generic;
+using System.IO;
+using Common.Models;
+using Serialization;
+using Serialization.Serializer;
+using Serialization.WireProtocol;
 
 namespace Node
 {
     public class BytesHelper
     { 
-        public static long GetObjectSizeInBytes(object obj)
+        public static long GetDataSizeInBytes(List<Employee> data)
         {
-            if(obj == null)
-                return 0;
-            
-            var binaryFormatter = new BinaryFormatter();
-            var memoryStream = new MemoryStream();
-            binaryFormatter.Serialize(memoryStream, obj);
-            return memoryStream.Length;
+           var defaultWireProtocol = new DefaultWireProtocol();
+            long totayBytes = 0;
+           data.ForEach(item =>
+           {
+               var stream = new MemoryStream();
+               defaultWireProtocol.WriteMessage(new DefaultSerializer(stream), item);
+               totayBytes += stream.Length;
+           });
+            return totayBytes;
         }
 
     }

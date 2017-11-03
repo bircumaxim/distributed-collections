@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mediator>
+    <Broker Ip="127.0.0.1" Port="8000"/>
+    <DiscoveryExchange Name="Discovery"/>
+    <DiscoveryRequestsQueue Name="discovery-requests"/>
+    <DiscoveryResponseExchcenge Name="DiscoveryResponse"/>
+    <DiscoveryResponsesQueue Name="discovery-responses"/>
+</Mediator>

@@ -1,7 +1,9 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using Common;
 using MessageBuss.Buss;
 using MessageBuss.Buss.Events;
+using Node.Events;
 
 namespace Node
 {
@@ -12,12 +14,16 @@ namespace Node
         private readonly IPEndPoint _udpIpEndPoint;
         private readonly IPEndPoint _tcIpEndPoint;
         private readonly IPEndPoint _multicastIpEndPoint;
+        private readonly ServerNode _serverNode;
+        private DiscoveryRequestMessage _discoveryRequestMessage;
 
-        public DiscoveryService(IPEndPoint multicastIpEndPoint, IPEndPoint tcIpEndPoint, IPEndPoint udpIpEndPoint)
+        public DiscoveryService(IPEndPoint multicastIpEndPoint, IPEndPoint tcIpEndPoint, IPEndPoint udpIpEndPoint, ServerNode serverNode)
         {
+            _serverNode = serverNode;
             _udpIpEndPoint = udpIpEndPoint;
             _tcIpEndPoint = tcIpEndPoint;
             _multicastIpEndPoint = multicastIpEndPoint;
+            _serverNode.DataQunatityComputed += OnDataQuantityComputed;
         }
 
         #region IRun methods
@@ -31,6 +37,8 @@ namespace Node
 
         public void Stop()
         {
+            _serverNode.DataQunatityComputed -= OnDataQuantityComputed;
+            _multicastBuss.MessageReceived -= OnMessageReceivedFromMulticastGroup;
             _multicastBuss.Dispose();
             _udpBuss?.Dispose();
         }
@@ -38,22 +46,37 @@ namespace Node
         #endregion
 
         private void OnMessageReceivedFromMulticastGroup(object sender, MessegeReceviedEventArgs args)
-        {
+        {   
             if (args.Payload.MessageTypeName == typeof(DiscoveryRequestMessage).Name)
             {
-                SendDiscoveryResponse(args);
+                _discoveryRequestMessage = (DiscoveryRequestMessage) args.Payload;
+                _serverNode.GetDataQuantity();
+            }
+            if (args.Payload.MessageTypeName == typeof(ConnectTheGraphMessage).Name)
+            {
+                _serverNode.ConnectoToKnowServers();
+                Console.WriteLine("Server graph connected !");
             }
         }
 
-        private void SendDiscoveryResponse(MessegeReceviedEventArgs args)
+        
+        private void OnDataQuantityComputed(object sender, DataQuantityEventArgs args)
         {
-            var discoveryRequest = (DiscoveryRequestMessage) args.Payload;
-            _udpBuss = BussFactory.Instance.GetBussFor("udp", discoveryRequest.BrockerIpEndPoint,
+            SendDiscoveryResponse(args.Qunatity);
+        }
+        
+        private void SendDiscoveryResponse(long dataQuantity)
+        {
+            _udpBuss = BussFactory.Instance.GetBussFor("udp", _discoveryRequestMessage.BrockerIpEndPoint,
                 _udpIpEndPoint);
             _udpBuss.Publish(
-                discoveryRequest.ExchangeName,
-                discoveryRequest.QueueName,
-                new DiscoveryResponseMessage {NodIpEndPoint = _tcIpEndPoint}
+                _discoveryRequestMessage.ExchangeName,
+                _discoveryRequestMessage.QueueName,
+                new DiscoveryResponseMessage
+                {
+                    NodIpEndPoint = _tcIpEndPoint,
+                    DataQuantity = dataQuantity
+                }
             );
         }
     }

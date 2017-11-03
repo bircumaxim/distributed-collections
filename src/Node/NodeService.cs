@@ -11,7 +11,7 @@ namespace Node
         {
             var dataManager = new DataManager(nodeConfig.DataObjectsCount);
             _serverNode = new ServerNode(nodeConfig.TcpIpEndPoint.Port, nodeConfig.KnownEndPoints, dataManager);
-            _discoveryService = new DiscoveryService(nodeConfig.MulticastIpEndPoint, nodeConfig.TcpIpEndPoint, nodeConfig.UdpIpEndPoint);
+            _discoveryService = new DiscoveryService(nodeConfig.MulticastIpEndPoint, nodeConfig.TcpIpEndPoint, nodeConfig.UdpIpEndPoint, _serverNode);
         }
 
         public void Stop()
