@@ -2,7 +2,11 @@
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.Serialization.Formatters.Binary;
 using Common;
+using Common.Messages.DataRequest;
+using Common.Messages.DataResponse;
+using Common.Messages.DataResponse.Binary;
 using Serialization.WireProtocol;
 using Transport.Connectors.Tcp;
 using Transport.Events;
@@ -13,7 +17,7 @@ namespace Client
     {
         private static TcpConnector _tcpConnector;
         private const string MediatorIp = "127.0.0.1";
-        private const int MediatorPort = 4000;
+        private const int MediatorPort = 1000;
 
         public static void Main(string[] args)
         {
@@ -30,7 +34,7 @@ namespace Client
             {
                 var requestMessage = new DataRequestMessageBuilder()
                     .OrderBy(empl => empl.Age)
-                    .WithTimeout(100)
+                    .WithTimeout(5000)
                     .Build();
                 _tcpConnector.SendMessage(requestMessage);
             }
@@ -38,11 +42,11 @@ namespace Client
         
         private static void OnMessageReceived(object sender, MessageReceivedEventArgs args)
         {
-            if (args.Message.MessageTypeName == typeof(DataResponseMessage).Name)
+            if (args.Message.MessageTypeName == typeof(BinaryDataResponseMessage).Name)
             {
-                var message = (DataResponseMessage) args.Message;
-                Console.WriteLine(message.Employees.Length);
-                message.Employees.ToList().ForEach(Console.WriteLine);
+                var message = (BinaryDataResponseMessage) args.Message;
+                Console.WriteLine(message.EmployeesMessage.Length);
+                message.EmployeesMessage.ToList().ForEach(Console.WriteLine);
             }
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Common;
+using Common.Messages.Discovery;
 using Mediator.Events;
 using MessageBuss.Buss;
 using MessageBuss.Buss.Events;

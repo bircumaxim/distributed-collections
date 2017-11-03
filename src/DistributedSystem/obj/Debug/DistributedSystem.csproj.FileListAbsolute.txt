@@ -1,10 +1,13 @@
 D:\projects\utm\distributed-collections\src\DistributedSystem\bin\Debug\DistributedSystem.exe
 D:\projects\utm\distributed-collections\src\DistributedSystem\bin\Debug\DistributedSystem.pdb
+D:\projects\utm\distributed-collections\src\DistributedSystem\bin\Debug\Common.dll
 D:\projects\utm\distributed-collections\src\DistributedSystem\bin\Debug\MessageBuss.dll
 D:\projects\utm\distributed-collections\src\DistributedSystem\bin\Debug\Messages.dll
 D:\projects\utm\distributed-collections\src\DistributedSystem\bin\Debug\Serialization.dll
+D:\projects\utm\distributed-collections\src\DistributedSystem\bin\Debug\Serialize.Linq.dll
 D:\projects\utm\distributed-collections\src\DistributedSystem\bin\Debug\Transport.dll
 D:\projects\utm\distributed-collections\src\DistributedSystem\bin\Debug\log4net.dll
+D:\projects\utm\distributed-collections\src\DistributedSystem\bin\Debug\Common.pdb
 D:\projects\utm\distributed-collections\src\DistributedSystem\bin\Debug\MessageBuss.pdb
 D:\projects\utm\distributed-collections\src\DistributedSystem\bin\Debug\MessageBuss.dll.config
 D:\projects\utm\distributed-collections\src\DistributedSystem\bin\Debug\Messages.pdb

@@ -4,6 +4,9 @@ using System.Data.SqlTypes;
 using System.Net;
 using System.Net.Sockets;
 using Common;
+using Common.Messages.DataRequest;
+using Common.Messages.DataResponse;
+using Common.Messages.DataResponse.Binary;
 using Serialization.WireProtocol;
 using Transport.Connectors.Tcp;
 using Transport.Events;
@@ -34,7 +37,7 @@ namespace Mediator
 
         private void OnMessageReceived(object sender, MessageReceivedEventArgs args)
         {
-            if (args.Message.MessageTypeName == typeof(DataResponseMessage).Name)
+            if (args.Message.MessageTypeName == typeof(BinaryDataResponseMessage).Name)
             {
                 MessageReceived?.Invoke(this, args);
             }

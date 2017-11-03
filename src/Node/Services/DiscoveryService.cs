@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Net;
 using Common;
+using Common.Messages;
+using Common.Messages.Discovery;
 using MessageBuss.Buss;
 using MessageBuss.Buss.Events;
 using Node.Events;

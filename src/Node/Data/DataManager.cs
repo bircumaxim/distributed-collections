@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Common;
 using Common.Models;
 using Common.Models.Filters;
 
@@ -23,15 +24,12 @@ namespace Node.Data
             }
         }
 
-        public Employee[] GetEmployees(List<Filter<Employee>> filters = null)
+        public List<Employee> GetEmployees(List<Filter<Employee>> filters = null)
         {
-            var employees = _employees.Select(empl => empl).ToArray();
+            var employees = _employees.Select(empl => empl);
             if (filters != null)
-                foreach (var filter in filters)
-                {
-                    employees = filter.Execute(employees.ToArray());
-                }
-            return employees;
+                employees = filters.Aggregate(employees, (current, filter) => filter.Execute(current.ToArray()));
+            return employees.ToList();
         }
     }
 }

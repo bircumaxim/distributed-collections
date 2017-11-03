@@ -3,7 +3,7 @@ using Serialization;
 using Serialization.Deserializer;
 using Serialization.Serializer;
 
-namespace Common
+namespace Common.Messages.Discovery
 {
     public class DiscoveryResponseMessage : Message
     {

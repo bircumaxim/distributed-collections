@@ -1,4 +1,5 @@
 ﻿using System;
+using Common;
 using Common.Models;
 
 namespace Node.Data

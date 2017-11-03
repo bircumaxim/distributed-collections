@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 using Common.Models;
 using Common.Models.Filters;
 
-namespace Common
+namespace Common.Messages.DataRequest
 {
     public class DataRequestMessageBuilder
     {

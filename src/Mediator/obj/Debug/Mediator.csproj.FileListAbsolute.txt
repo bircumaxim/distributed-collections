@@ -1,11 +1,10 @@
-D:\projects\utm\distributed-collections\src\Mediator\obj\Debug\Mediator.csprojResolveAssemblyReference.cache
-D:\projects\utm\distributed-collections\src\Mediator\obj\Debug\Mediator.csproj.CoreCompileInputs.cache
 D:\projects\utm\distributed-collections\src\Mediator\bin\Debug\Mediator.exe
 D:\projects\utm\distributed-collections\src\Mediator\bin\Debug\Mediator.pdb
 D:\projects\utm\distributed-collections\src\Mediator\bin\Debug\Common.dll
 D:\projects\utm\distributed-collections\src\Mediator\bin\Debug\MessageBuss.dll
 D:\projects\utm\distributed-collections\src\Mediator\bin\Debug\Messages.dll
 D:\projects\utm\distributed-collections\src\Mediator\bin\Debug\Serialization.dll
+D:\projects\utm\distributed-collections\src\Mediator\bin\Debug\Serialize.Linq.dll
 D:\projects\utm\distributed-collections\src\Mediator\bin\Debug\Transport.dll
 D:\projects\utm\distributed-collections\src\Mediator\bin\Debug\log4net.dll
 D:\projects\utm\distributed-collections\src\Mediator\bin\Debug\Common.pdb
@@ -15,6 +14,7 @@ D:\projects\utm\distributed-collections\src\Mediator\bin\Debug\Messages.pdb
 D:\projects\utm\distributed-collections\src\Mediator\bin\Debug\Serialization.pdb
 D:\projects\utm\distributed-collections\src\Mediator\bin\Debug\Transport.pdb
 D:\projects\utm\distributed-collections\src\Mediator\bin\Debug\log4net.xml
+D:\projects\utm\distributed-collections\src\Mediator\obj\Debug\Mediator.csprojResolveAssemblyReference.cache
+D:\projects\utm\distributed-collections\src\Mediator\obj\Debug\Mediator.csproj.CoreCompileInputs.cache
 D:\projects\utm\distributed-collections\src\Mediator\obj\Debug\Mediator.exe
 D:\projects\utm\distributed-collections\src\Mediator\obj\Debug\Mediator.pdb
-D:\projects\utm\distributed-collections\src\Mediator\bin\Debug\Serialize.Linq.dll

@@ -10,6 +10,7 @@ namespace DistributedSystem
         public string TcpIpEndPoint { get; set; }
         public List<string> KnownEndPoints { get; set; }
         public string DataObjectsCount { get; set; }
+        public string DataType { get; set; }
 
         public NodeConfig()
         {

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Threading;
 using Common;
+using Common.Messages;
 using Serialization.WireProtocol;
 using Transport.Connectors.UdpMulticast;
 
@@ -44,6 +45,7 @@ namespace DistributedSystem
                 nodeConfig.MulticastIpEndPoint,
                 nodeConfig.UdpIpEndPoint,
                 nodeConfig.TcpIpEndPoint,
+                nodeConfig.DataType,
                 nodeConfig.DataObjectsCount
             };
             var knownIpsForNode = GetKnownIpsForNode(nodeConfig);

@@ -1,9 +1,8 @@
 ﻿using Serialization;
 
-namespace Common
+namespace Common.Messages
 {
     public class ConnectTheGraphMessage : Message
     {
-        
     }
 }

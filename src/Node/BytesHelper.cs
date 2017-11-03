@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using Common;
 using Common.Models;
 using Serialization;
 using Serialization.Serializer;
@@ -11,15 +13,10 @@ namespace Node
     { 
         public static long GetDataSizeInBytes(List<Employee> data)
         {
-           var defaultWireProtocol = new DefaultWireProtocol();
-            long totayBytes = 0;
-           data.ForEach(item =>
-           {
-               var stream = new MemoryStream();
-               defaultWireProtocol.WriteMessage(new DefaultSerializer(stream), item);
-               totayBytes += stream.Length;
-           });
-            return totayBytes;
+            var stream = new MemoryStream();
+            var binaryFormatter = new BinaryFormatter();
+            binaryFormatter.Serialize(stream, data);
+            return stream.Length;
         }
 
     }

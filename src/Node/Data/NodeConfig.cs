@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using Common.Models;
 
-namespace Node
+namespace Node.Data
 {
     public class NodeConfig
     {
@@ -12,6 +13,7 @@ namespace Node
         public IPEndPoint TcpIpEndPoint { get; set; }
         public List<IPEndPoint> KnownEndPoints { get; set; }
         public int DataObjectsCount { get; set; }
+        public DataType DataType { get; set; }
 
         public NodeConfig()
         {
@@ -19,6 +21,7 @@ namespace Node
             MulticastIpEndPoint = new IPEndPoint(IPAddress.Parse("224.5.6.7"), 7000);
             UdpIpEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 3000);
             TcpIpEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 4000);
+            DataType = DataType.Binary;
             DataObjectsCount = 10;
             KnownEndPoints = new List<IPEndPoint>();
         }

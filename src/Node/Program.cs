@@ -1,6 +1,12 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
 using System.Net;
+using System.Xml.Serialization;
+using Common;
+using Common.Models;
 using Messages.Payload;
+using Node.Data;
 
 namespace Node
 {
@@ -8,8 +14,6 @@ namespace Node
     {
         public static void Main(string[] args)
         {
-            var payloadMessage = new PayloadMessage();
-
             var nodeConfig = args.Length > 0 ? GetNodeConfigFromArgs(args) : new NodeConfig();
             var nodeService = new NodeService(nodeConfig);
             nodeService.StartAsync();
@@ -28,7 +32,8 @@ namespace Node
                 MulticastIpEndPoint = GetIpEndPointFromString(args[1]),
                 UdpIpEndPoint = GetIpEndPointFromString(args[2]),
                 TcpIpEndPoint = GetIpEndPointFromString(args[3]),
-                DataObjectsCount = Convert.ToInt32(args[4])
+                DataType = (DataType) Enum.Parse(typeof(DataType), args[4]),
+                DataObjectsCount = Convert.ToInt32(args[5])
             };
             for (var i = 5; i < args.Length; i++)
             {

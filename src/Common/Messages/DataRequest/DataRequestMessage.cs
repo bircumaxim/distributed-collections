@@ -7,7 +7,7 @@ using Serialization.Deserializer;
 using Serialization.Serializer;
 using Serialization.WireProtocol;
 
-namespace Common
+namespace Common.Messages.DataRequest
 {
     public class DataRequestMessage : Message
     {

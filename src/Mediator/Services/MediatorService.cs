@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using Common;
+using Common.Messages.DataRequest;
+using Common.Messages.DataResponse;
+using Common.Messages.DataResponse.Binary;
 using Mediator.Events;
 using Transport.Events;
 
@@ -33,7 +36,7 @@ namespace Mediator.Services
                 SelectBestServerToConectAfter(_dataRequestMessagge.RequestTimeout).Start();
             }
 
-            if (args.Message.MessageTypeName == typeof(DataResponseMessage).Name)
+            if (args.Message.MessageTypeName == typeof(BinaryDataResponseMessage).Name)
             {
                 _clientConnecionService.SendDataToClient(args.Message);
             }

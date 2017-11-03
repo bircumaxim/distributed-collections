@@ -51,20 +51,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConnectTheGraphMessage.cs" />
-    <Compile Include="DataQuantityRequestMessage.cs" />
-    <Compile Include="DataQuantityResponseMessage.cs" />
-    <Compile Include="DiscoveryRequestMessage.cs" />
-    <Compile Include="DiscoveryResponseMessage.cs" />
-    <Compile Include="DataRequestMessage.cs" />
-    <Compile Include="DataRequestMessageBuilder.cs" />
+    <Compile Include="Filters\Filter.cs" />
+    <Compile Include="Filters\IntOrderByFilter.cs" />
+    <Compile Include="Filters\StringOrderByFilter.cs" />
+    <Compile Include="Filters\WhereFilter.cs" />
+    <Compile Include="Messages\ConnectTheGraphMessage.cs" />
+    <Compile Include="Messages\DataQuantity\DataQuantityRequestMessage.cs" />
+    <Compile Include="Messages\DataQuantity\DataQuantityResponseMessage.cs" />
+    <Compile Include="Messages\DataRequest\DataRequestMessage.cs" />
+    <Compile Include="Messages\DataRequest\DataRequestMessageBuilder.cs" />
+    <Compile Include="Messages\DataResponse\Binary\BinaryDataResponseMessage.cs" />
+    <Compile Include="Messages\DataResponse\Binary\EmployeeMessage.cs" />
+    <Compile Include="Messages\DataResponse\DataResponseMessage.cs" />
+    <Compile Include="Messages\DataResponse\DataResponseMessageFactory.cs" />
+    <Compile Include="Messages\DataResponse\xml\EmployeeMessage.cs" />
+    <Compile Include="Messages\DataResponse\xml\EmplyeeList.cs" />
+    <Compile Include="Messages\DataResponse\xml\XmlDataResponseMessage.cs" />
+    <Compile Include="Messages\Discovery\DiscoveryRequestMessage.cs" />
+    <Compile Include="Messages\Discovery\DiscoveryResponseMessage.cs" />
+    <Compile Include="Models\DataType.cs" />
     <Compile Include="Models\Employee.cs" />
-    <Compile Include="Models\Filters\Filter.cs" />
-    <Compile Include="Models\Filters\IntOrderByFilter.cs" />
-    <Compile Include="Models\Filters\StringOrderByFilter.cs" />
-    <Compile Include="Models\Filters\WhereFilter.cs" />
+    <Compile Include="Models\Mappers\EmplyeeToEmployeeMessageMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DataResponseMessage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

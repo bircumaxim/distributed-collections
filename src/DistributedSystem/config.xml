@@ -11,10 +11,10 @@
         and to which the root node will connect.
 -->
 <System>
-    <Node Name="Node1" UdpIpEndPoint="127.0.0.1:3001" TcpIpEndPoint="127.0.0.1:5001"/>
+    <Node Name="Node1" UdpIpEndPoint="127.0.0.1:3001" TcpIpEndPoint="127.0.0.1:5001" DataType="Xml"/>
 
     <Node Name="Node2" UdpIpEndPoint="127.0.0.1:3002" TcpIpEndPoint="127.0.0.1:5002">
-        <Node Name="Node4"/>
+        <Node Name="Node1"/>
     </Node>
 
     <Node Name="Node3" UdpIpEndPoint="127.0.0.1:3003" TcpIpEndPoint="127.0.0.1:5003">

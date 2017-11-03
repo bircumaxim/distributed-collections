@@ -7,7 +7,7 @@ namespace DistributedSystem
 {
     public class Config
     {
-        
+        private const string DefaultDataType = "Binary";
         private const string DefaultObjectsCount = "10";
         private const string DefaultMulticastIpEndPoint = "224.5.6.7:7000";
         
@@ -39,6 +39,7 @@ namespace DistributedSystem
                     MulticastIpEndPoint = nodesXmlNode.Attributes.GetNamedItem("MulticastIpEndPoint")?.Value ?? DefaultMulticastIpEndPoint,
                     UdpIpEndPoint = nodesXmlNode.Attributes.GetNamedItem("UdpIpEndPoint").Value,
                     TcpIpEndPoint = nodesXmlNode.Attributes.GetNamedItem("TcpIpEndPoint").Value,
+                    DataType = nodesXmlNode.Attributes.GetNamedItem("DataType")?.Value ?? DefaultDataType,
                     DataObjectsCount = nodesXmlNode.Attributes.GetNamedItem("DataObjects")?.Value ?? DefaultObjectsCount,
                     KnownEndPoints = GetKnownEndPoints(nodesXmlNode)
                 };
