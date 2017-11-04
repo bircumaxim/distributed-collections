@@ -1,4 +1,4 @@
-# MessageBroker
+# Distributed System
 ###### Simple distributed-collections system or build for educational purposes only. You could check bellow a short description and a guid of how to configure and to get started fast.
 <p align="center">
   <img  src="https://github.com/bircumaxim/distributed-collections/blob/master/doc/system-diagram.png">
