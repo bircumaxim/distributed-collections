@@ -1,6 +1,6 @@
 ﻿using Node.Data;
 
-namespace Node
+namespace Node.Services
 {
     public class NodeService
     {
@@ -10,7 +10,7 @@ namespace Node
         public NodeService(NodeConfig nodeConfig)
         {
             var dataManager = new DataManager(nodeConfig.DataObjectsCount);
-            _serverNode = new ServerNode(nodeConfig.TcpIpEndPoint.Port, nodeConfig.KnownEndPoints, dataManager);
+            _serverNode = new ServerNode(nodeConfig.TcpIpEndPoint.Port, nodeConfig.KnownEndPoints, nodeConfig.DataType, dataManager);
             _discoveryService = new DiscoveryService(nodeConfig.MulticastIpEndPoint, nodeConfig.TcpIpEndPoint, nodeConfig.UdpIpEndPoint, _serverNode);
         }
 

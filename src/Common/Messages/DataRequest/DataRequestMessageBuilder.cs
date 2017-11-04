@@ -9,6 +9,7 @@ namespace Common.Messages.DataRequest
     public class DataRequestMessageBuilder
     {
         private int _requestTimeout;
+        private DataType _dataType;
         private readonly List<Filter<Employee>> _filters;
 
         public DataRequestMessageBuilder()
@@ -24,7 +25,7 @@ namespace Common.Messages.DataRequest
             });
             return this;
         }
-        
+
         public DataRequestMessageBuilder OrderBy(Expression<Func<Employee, string>> func)
         {
             _filters.Add(new StringOrderByFilter
@@ -33,13 +34,19 @@ namespace Common.Messages.DataRequest
             });
             return this;
         }
-        
+
         public DataRequestMessageBuilder OrderBy(Expression<Func<Employee, int>> func)
         {
             _filters.Add(new IntOrderByFilter
             {
                 Func = func
             });
+            return this;
+        }
+
+        public DataRequestMessageBuilder DataType(DataType dataType)
+        {
+            _dataType = dataType;
             return this;
         }
 
@@ -54,7 +61,8 @@ namespace Common.Messages.DataRequest
             return new DataRequestMessage
             {
                 Filters = _filters,
-                RequestTimeout = _requestTimeout
+                RequestTimeout = _requestTimeout,
+                DataType = Enum.GetName(typeof(DataType), _dataType)
             };
         }
     }

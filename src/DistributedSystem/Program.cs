@@ -27,7 +27,7 @@ namespace DistributedSystem
 
         private static void SendConnectGraphMessage()
         {
-            Thread.Sleep(1000);
+            Thread.Sleep(2000);
             var list = _config.ServerNodes.Select(node => node.MulticastIpEndPoint).Distinct().ToList();
             list.ForEach(ip =>
             {

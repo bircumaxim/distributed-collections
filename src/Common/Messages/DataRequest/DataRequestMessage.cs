@@ -15,6 +15,7 @@ namespace Common.Messages.DataRequest
         public bool IsLastKnownServerNode { get; set; }
         public int RequestTimeout { get; set; }
         public List<Filter<Employee>> Filters { get; set; }
+        public string DataType;
 
         public DataRequestMessage()
         {
@@ -28,6 +29,7 @@ namespace Common.Messages.DataRequest
             serializer.WriteBoolean(IsLastKnownServerNode);
             serializer.WriteInt32(RequestTimeout);
             serializer.WriteInt32(Filters.Count);
+            serializer.WriteStringUtf8(DataType);
             Filters.ForEach(fitler => serializer.WriteByteArray(GetBytesFormFilter(fitler)));
         }
 
@@ -38,6 +40,7 @@ namespace Common.Messages.DataRequest
             IsLastKnownServerNode = deserializer.ReadBoolean();
             RequestTimeout = deserializer.ReadInt32();
             var filtersCount = deserializer.ReadInt32();
+            DataType = deserializer.ReadStringUtf8();
             for (var i = 0; i < filtersCount; i++)
             {
                 Filters.Add(GetFilterFormBytes(deserializer.ReadByteArray()));

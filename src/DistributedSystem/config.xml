@@ -13,7 +13,7 @@
 <System>
     <Node Name="Node1" UdpIpEndPoint="127.0.0.1:3001" TcpIpEndPoint="127.0.0.1:5001" DataType="Xml"/>
 
-    <Node Name="Node2" UdpIpEndPoint="127.0.0.1:3002" TcpIpEndPoint="127.0.0.1:5002">
+    <Node Name="Node2" UdpIpEndPoint="127.0.0.1:3002" TcpIpEndPoint="127.0.0.1:5002" DataType="Json">
         <Node Name="Node1"/>
     </Node>
 
@@ -21,13 +21,13 @@
         <Node Name="Node5"/>
     </Node>
 
-    <Node Name="Node4" UdpIpEndPoint="127.0.0.1:3004" TcpIpEndPoint="127.0.0.1:5004">
+    <Node Name="Node4" UdpIpEndPoint="127.0.0.1:3004" TcpIpEndPoint="127.0.0.1:5004" DataType="Xml">
         <Node Name="Node6"/>
         <Node Name="Node5"/>
         <Node Name="Node2"/>
     </Node>
 
-    <Node Name="Node5" UdpIpEndPoint="127.0.0.1:3005" TcpIpEndPoint="127.0.0.1:5005">
+    <Node Name="Node5" UdpIpEndPoint="127.0.0.1:3005" TcpIpEndPoint="127.0.0.1:5005" DataType="Binary">
         <Node Name="Node6"/>
         <Node Name="Node4"/>
         <Node Name="Node3"/>

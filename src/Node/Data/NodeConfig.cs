@@ -21,7 +21,7 @@ namespace Node.Data
             MulticastIpEndPoint = new IPEndPoint(IPAddress.Parse("224.5.6.7"), 7000);
             UdpIpEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 3000);
             TcpIpEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 4000);
-            DataType = DataType.Binary;
+            DataType = DataType.Json;
             DataObjectsCount = 10;
             KnownEndPoints = new List<IPEndPoint>();
         }

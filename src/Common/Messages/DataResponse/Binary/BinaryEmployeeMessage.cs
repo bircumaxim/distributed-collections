@@ -5,7 +5,7 @@ using Serialization.Serializer;
 
 namespace Common.Messages.DataResponse.Binary
 {
-    public class EmployeeMessage : Message
+    public class BinaryEmployeeMessage : Message
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

@@ -1,26 +1,22 @@
-﻿using Serialization;
-using Serialization.Deserializer;
+﻿using Serialization.Deserializer;
 using Serialization.Serializer;
 
-namespace Common
+namespace Common.Messages.DataResponse.xml
 {
-    public class XmlDataResponseMessage : Message
+    public class XmlDataResponseMessage : DataResponseMessage
     {
-        public bool IsLastKnownServerNode { get; set; }
-        public string Employees { get; set; }
+        public string EmployeeMessages { get; set; }
 
         public override void Serialize(ISerializer serializer)
         {
             base.Serialize(serializer);
-            serializer.WriteBoolean(IsLastKnownServerNode);
-            serializer.WriteStringUtf8(Employees);
+            serializer.WriteStringUtf8(EmployeeMessages);
         }
 
         public override void Deserialize(IDeserializer deserializer)
         {
             base.Deserialize(deserializer);
-            IsLastKnownServerNode = deserializer.ReadBoolean();
-            Employees = deserializer.ReadStringUtf8();
+            EmployeeMessages = deserializer.ReadStringUtf8();
         }
     }
 }

@@ -30,9 +30,11 @@ namespace Node
         private long _totalDataQunatity;
         private readonly List<IPEndPoint> _knownEndPoints;
         public event DataQuantityEventArgsEvemtHandler DataQunatityComputed;
+        private readonly DataType _dataType;
 
-        public ServerNode(int tcpPort, List<IPEndPoint> knownEndPoints, DataManager dataManager)
+        public ServerNode(int tcpPort, List<IPEndPoint> knownEndPoints,DataType dataType, DataManager dataManager)
         {
+            _dataType = dataType;
             _knownEndPoints = knownEndPoints;
             _dataManager = dataManager;
             _tcpConnectionManager = new TcpConnectionManager(tcpPort, new DefaultWireProtocol());
@@ -71,7 +73,6 @@ namespace Node
 
         private void OnMessageReceivedFromTcpClient(object sender, MessageReceivedEventArgs args)
         {
-            Console.WriteLine(args.Message.MessageTypeName);
             if (args.Message.MessageTypeName == typeof(DataRequestMessage).Name)
             {
                 HandleDataRequest(args);
@@ -113,7 +114,7 @@ namespace Node
         private void HandleDataRequest(MessageReceivedEventArgs args)
         {
             var message = (DataRequestMessage) args.Message;
-            var dataResponseMessage = DataResponseMessageFactory.GetDataResponseMessage(DataType.Binary, _dataManager.GetEmployees(message.Filters));
+            var dataResponseMessage = DataResponseMessageFactory.GetDataResponseMessage(_dataType, _dataManager.GetEmployees(message.Filters));
             if (message.IsFromAServerNode || _knowedServerNodesConnectors.Count == 0)
             {
                 dataResponseMessage.IsLastKnownServerNode = message.IsLastKnownServerNode;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -7,6 +8,9 @@ using Common;
 using Common.Messages.DataRequest;
 using Common.Messages.DataResponse;
 using Common.Messages.DataResponse.Binary;
+using Common.Messages.DataResponse.Json;
+using Common.Messages.DataResponse.xml;
+using Common.Models;
 using Serialization.WireProtocol;
 using Transport.Connectors.Tcp;
 using Transport.Events;
@@ -15,9 +19,15 @@ namespace Client
 {
     internal class Program
     {
+        private static readonly string XmlValidationSchemaFilePath =
+            Path.Combine(Directory.GetCurrentDirectory(), "EmployeeValidationSchema.xsd");
+
+        private static readonly string JsonValidationSchemaFilePath =
+            Path.Combine(Directory.GetCurrentDirectory(), "EmployeeValidationSchema.json");
+
         private static TcpConnector _tcpConnector;
         private const string MediatorIp = "127.0.0.1";
-        private const int MediatorPort = 1000;
+        private const int MediatorPort = 4000;
 
         public static void Main(string[] args)
         {
@@ -34,19 +44,38 @@ namespace Client
             {
                 var requestMessage = new DataRequestMessageBuilder()
                     .OrderBy(empl => empl.Age)
-                    .WithTimeout(5000)
+                    .WithTimeout(2000)
+                    .DataType(DataType.Json)
                     .Build();
                 _tcpConnector.SendMessage(requestMessage);
             }
         }
-        
+
         private static void OnMessageReceived(object sender, MessageReceivedEventArgs args)
         {
             if (args.Message.MessageTypeName == typeof(BinaryDataResponseMessage).Name)
             {
                 var message = (BinaryDataResponseMessage) args.Message;
-                Console.WriteLine(message.EmployeesMessage.Length);
-                message.EmployeesMessage.ToList().ForEach(Console.WriteLine);
+                Console.WriteLine(message.EmployeeMessages.Length);
+                message.EmployeeMessages.ToList().ForEach(Console.WriteLine);
+            }
+            if (args.Message.MessageTypeName == typeof(XmlDataResponseMessage).Name)
+            {
+                var message = (XmlDataResponseMessage) args.Message;
+                Console.WriteLine(message.EmployeeMessages);
+                var emplyeeList = XmlHelper.Deserealize(message.EmployeeMessages);
+                emplyeeList?.Employees?.ForEach(Console.WriteLine);
+                XmlHelper.ValidateXml(message.EmployeeMessages, XmlValidationSchemaFilePath,
+                    (s, e) => { Console.WriteLine(e.Message); });
+            }
+            if (args.Message.MessageTypeName == typeof(JsonDataResponseMessage).Name)
+            {
+                var message = (JsonDataResponseMessage) args.Message;
+                Console.WriteLine(message.EmployeeMessages.Replace("\\", "").Replace("/", "").Replace(" ", ""));
+                var emplyeeList = JsonHelper.Deserealize(message.EmployeeMessages);
+                emplyeeList?.ForEach(Console.WriteLine);
+                JsonHelper.ValidateJson(message.EmployeeMessages, JsonValidationSchemaFilePath,
+                    (s, e) => Console.WriteLine(e.Message));
             }
         }
 

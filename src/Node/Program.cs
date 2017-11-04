@@ -1,12 +1,8 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
 using System.Net;
-using System.Xml.Serialization;
-using Common;
 using Common.Models;
-using Messages.Payload;
 using Node.Data;
+using Node.Services;
 
 namespace Node
 {
@@ -35,7 +31,7 @@ namespace Node
                 DataType = (DataType) Enum.Parse(typeof(DataType), args[4]),
                 DataObjectsCount = Convert.ToInt32(args[5])
             };
-            for (var i = 5; i < args.Length; i++)
+            for (var i = 6; i < args.Length; i++)
             {
                 nodeConfig.KnownEndPoints.Add(GetIpEndPointFromString(args[i]));
             }
